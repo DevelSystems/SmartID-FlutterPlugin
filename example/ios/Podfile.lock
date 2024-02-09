@@ -1,0 +1,29 @@
+PODS:
+  - Flutter (1.0.0)
+  - KeychainAccess (4.2.2)
+  - smartid_flutter (1.0.0):
+    - Flutter
+    - KeychainAccess (= 4.2.2)
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - smartid_flutter (from `.symlinks/plugins/smartid_flutter/ios`)
+
+SPEC REPOS:
+  trunk:
+    - KeychainAccess
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  smartid_flutter:
+    :path: ".symlinks/plugins/smartid_flutter/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  KeychainAccess: c0c4f7f38f6fc7bbe58f5702e25f7bd2f65abf51
+  smartid_flutter: 2175fe83b294ad551d60e1bc15994489cd9b66b1
+
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
+
+COCOAPODS: 1.14.3
