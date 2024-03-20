@@ -27,7 +27,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController userNameController = TextEditingController(text: 'test');
-  TextEditingController licenseController = TextEditingController(text: 'AHvO67N79kYfp3Tsq09Wq4mOrhNCLCdhHjT5xWxA4crZ');
+  TextEditingController licenseController = TextEditingController(text: 'HZYYaGB2Z3uubOfrwf8wMYBUi0MAneecMf8G0OB6O7F3');
   TextEditingController channelController = TextEditingController(text: '1');
   final SmartIdFlutter _smartIdFlutter = SmartIdFlutter();
 
@@ -73,19 +73,15 @@ class _MyAppState extends State<MyApp> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch the buttons to match the column width
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            SmartIdFlutter.initNativeInstance(licenseController.text, userNameController.text, false);
+                            SmartIdFlutter.initNativeInstance(licenseController.text, userNameController.text, false).then((value) {
+                              SmartIdFlutter.linkNative(channelController.text, 'session');
+                            });
                           },
-                          child: Text('Init Instance'),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            SmartIdFlutter.linkNative(channelController.text, 'session');
-                          },
-                          child: Text('Link'),
+                          child: Text('Init Instance and Link'),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -96,60 +92,60 @@ class _MyAppState extends State<MyApp> {
                         ElevatedButton(
                           onPressed: () {
                             OperationModel operationModel = OperationModel(
-                                channelController.text,
+                                '1',
                                 DeviceModel(
-                                    'smartId',
-                                    'ipAddress'
+                                    '',
+                                    ''
                                 ),
                                 TransactionModel(
-                                    'category',
-                                    'type',
-                                    'description',
-                                    'reference',
-                                    'date',
+                                    '78e3815d374645b3934f2368dfcbdba7',
+                                    'save_Card',
+                                    '78e3815d374645b3934f2368dfcbdba7',
+                                    '',
+                                    '', //Date deberia de enviarse vacio
                                     {}
                                 ),
                                 AccountModel(
-                                    'client',
+                                    '2138800002',
                                     0,
-                                    'clientRefIdString',
-                                    'email',
-                                    'phoneNumber',
-                                    'session',
-                                    'accountNumber',
-                                    'bank'
+                                    '',
+                                    '',
+                                    '2138800002',
+                                    '333',
+                                    '',
+                                    ''
                                 ),
                                 AccountToModel(
-                                    'client',
+                                    '31495082',
                                     0,
-                                    'clientRefIdStr',
-                                    'email',
-                                    'phoneNumber',
-                                    'session',
-                                    'accountNumber',
-                                    'bank'
+                                    '',
+                                    '',
+                                    '31495082',
+                                    '',
+                                    '',
+                                    ''
                                 ),
                                 DebitFromModel(
-                                    'account',
-                                    'bank',
-                                    'currency'
+                                    '',
+                                    '',
+                                    ''
                                 ),
                                 CreditToModel(
-                                    'account',
-                                    'bank',
-                                    'currency'
+                                    '',
+                                    '',
+                                    ''
                                 ),
                                 CreditCardModel(
-                                    'bin',
-                                    'hash',
-                                    'last4Digits',
-                                    'token'
+                                    'Visa',
+                                    '0404',
+                                    '0404',
+                                    ''
                                 ),
                                 OrderModel(
-                                  0,
-                                  'currency'
+                                  7.5,
+                                  'usd'
                                 ),
-                                'timeStamp'
+                                ''
                             );
 
                             SmartIdFlutter.createOperationNative(licenseController.text, operationModel, false);

@@ -18,33 +18,39 @@ class SmartIdFlutter {
   }
 
   static Future<void> initNativeInstance(String license, String username, bool isProduction) async {
-    await _channel.invokeMethod(initInstance, {
+    var result = await _channel.invokeMethod(initInstance, {
       "license": license,
       "username": username,
       "isProduction": isProduction
     });
+    print('Init result: $result');
   }
 
   static Future<void> linkNative(String channel, String session) async {
-    await _channel.invokeMethod(link, {
+    var result = await _channel.invokeMethod(link, {
       "channel": channel,
       "session": session
     });
+    print('Link result: $result');
   }
 
   static Future<void> unlinkNative(String channel, String session) async {
-    await _channel.invokeMethod(unlink, {
+    var result = await _channel.invokeMethod(unlink, {
       "channel": channel,
       "session": session
     });
+    print('UnLink result: $result');
+
   }
 
   static Future<void> createOperationNative(String license, OperationModel operationModel, bool isProduction) async {
     final Map<String, dynamic> operationMap = operationModel.toJson();
-    await _channel.invokeMethod(createOperation, {
+    var result = await _channel.invokeMethod(createOperation, {
       "license": license,
       "operation": operationMap,
       "isProduction": isProduction
     });
+    print('Create operation result: $result');
+
   }
 }

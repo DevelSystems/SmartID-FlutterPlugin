@@ -5,7 +5,7 @@
         android:label="smartid_flutter_example"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-       tools:replace="label">
+        tools:replace="label">
         <activity
             android:name=".MainActivity"
             android:exported="true"

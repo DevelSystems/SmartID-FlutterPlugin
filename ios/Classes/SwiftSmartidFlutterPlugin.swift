@@ -64,15 +64,18 @@ public class SwiftSmartidFlutterPlugin: NSObject, FlutterPlugin {
         do {
             print("Operation JSON: \(operationDict)")
 
+
+
             let operationData = try JSONSerialization.data(withJSONObject: operationDict, options: [])
 
             let decoder = JSONDecoder()
             do {
                 let operation = try decoder.decode(CoreOperation.self, from: operationData)
+                print(operation)
+
                 SID.shared.createOperation(channel: license, operation: operation)
             } catch let error {
                 print("Decoding error: \(error)")
-                // Consider using a more detailed error response to send back to Flutter
                 result(FlutterError(code: "DECODE_ERROR", message: "Failed to decode operation", details: error.localizedDescription))
                 return
             }
