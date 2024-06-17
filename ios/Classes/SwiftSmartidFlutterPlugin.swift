@@ -60,22 +60,28 @@ public class SwiftSmartidFlutterPlugin: NSObject, FlutterPlugin {
             result(FlutterError(code: "INVALID_ARGUMENTS", message: "Invalid arguments received", details: nil))
             return
         }
-
         do {
-            print("Operation JSON: \(operationDict)")
-
-
-
             let operationData = try JSONSerialization.data(withJSONObject: operationDict, options: [])
 
             let decoder = JSONDecoder()
             do {
-                let operation = try decoder.decode(CoreOperation.self, from: operationData)
-                print(operation)
+                var operation = try decoder.decode(CoreOperation.self, from: operationData)
+
+                let newAccount = Account(
+                    client: operation.account?.client ?? "",
+                    clientRefId: 0,
+                    clientRefIdStr: "",
+                    email: "",
+                    phoneNumber: "",
+                    session: "",
+                    accountNumber: "",
+                    bank: ""
+                )
+
+                operation.account?.client = newAccount.client
 
                 SID.shared.createOperation(channel: license, operation: operation)
             } catch let error {
-                print("Decoding error: \(error)")
                 result(FlutterError(code: "DECODE_ERROR", message: "Failed to decode operation", details: error.localizedDescription))
                 return
             }

@@ -73,15 +73,19 @@ class _MyAppState extends State<MyApp> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch the buttons to match the column width
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            SmartIdFlutter.initNativeInstance(licenseController.text, userNameController.text, false).then((value) {
-                              SmartIdFlutter.linkNative(channelController.text, 'session');
-                            });
+                            SmartIdFlutter.initNativeInstance(licenseController.text, userNameController.text, false);
                           },
-                          child: Text('Init Instance and Link'),
+                          child: Text('Init Instance'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            SmartIdFlutter.linkNative(channelController.text, 'session');
+                          },
+                          child: Text('Link'),
                         ),
                         ElevatedButton(
                           onPressed: () {
@@ -92,63 +96,63 @@ class _MyAppState extends State<MyApp> {
                         ElevatedButton(
                           onPressed: () {
                             OperationModel operationModel = OperationModel(
-                                '1',
+                                channelController.text,
                                 DeviceModel(
                                     '',
                                     ''
                                 ),
                                 TransactionModel(
-                                    '78e3815d374645b3934f2368dfcbdba7',
-                                    'save_Card',
-                                    '78e3815d374645b3934f2368dfcbdba7',
+                                    'transfer',
+                                    'CC to CA',
+                                    'prueba',
                                     '',
-                                    '', //Date deberia de enviarse vacio
+                                    '',
                                     {}
                                 ),
                                 AccountModel(
-                                    '2138800002',
+                                    userNameController.text,
                                     0,
                                     '',
                                     '',
-                                    '2138800002',
-                                    '333',
                                     '',
+                                    '',
+                                    '123',
                                     ''
                                 ),
                                 AccountToModel(
-                                    '31495082',
+                                    '',
                                     0,
                                     '',
                                     '',
-                                    '31495082',
+                                    '',
                                     '',
                                     '',
                                     ''
                                 ),
                                 DebitFromModel(
-                                    '',
+                                    '123123123',
                                     '',
                                     ''
                                 ),
                                 CreditToModel(
-                                    '',
+                                    '123123124',
                                     '',
                                     ''
                                 ),
                                 CreditCardModel(
-                                    'Visa',
-                                    '0404',
-                                    '0404',
+                                    '',
+                                    '',
+                                    '',
                                     ''
                                 ),
                                 OrderModel(
-                                  7.5,
-                                  'usd'
+                                    10,
+                                    'USD'
                                 ),
-                                ''
+                                'timeStamp'
                             );
 
-                            SmartIdFlutter.createOperationNative(licenseController.text, operationModel, false);
+                            SmartIdFlutter.createOperationNative(licenseController.text, operationModel, true);
                           },
                           child: Text('Create Operation'),
                         ),
