@@ -1,15 +1,23 @@
-class AccountModel{
-  String client;
+class AccountModel {
+  String? client;
   int? clientRefId;
-  String clientRefIdStr;
-  String email;
-  String phoneNumber;
-  String session;
-  String accountNumber;
-  String bank;
+  String? clientRefIdStr;
+  String? email;
+  String? phoneNumber;
+  String? session;
+  String? accountNumber;
+  String? bank;
 
-  AccountModel(this.client, this.clientRefId, this.clientRefIdStr, this.email,
-      this.phoneNumber, this.session, this.accountNumber, this.bank);
+  AccountModel({
+    this.client,
+    this.clientRefId,
+    this.clientRefIdStr,
+    this.email,
+    this.phoneNumber,
+    this.session,
+    this.accountNumber,
+    this.bank,
+  });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {
@@ -28,5 +36,4 @@ class AccountModel{
 
     return data;
   }
-
 }

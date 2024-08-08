@@ -1,14 +1,13 @@
-class CreditToModel{
-  String account;
-  String bank;
-  String currency;
+class CreditToModel {
+  String? account;
+  String? bank;
+  String? currency;
 
-  CreditToModel(this.account, this.bank, this.currency);
+  CreditToModel({this.account, this.bank, this.currency});
 
   Map<String, dynamic> toJson() => {
-    'account': account,
-    'bank': bank,
-    'currency': currency,
-  };
-
+        'account': account,
+        'bank': bank,
+        'currency': currency,
+      };
 }

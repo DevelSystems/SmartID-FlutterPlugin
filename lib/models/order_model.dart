@@ -1,12 +1,11 @@
-class OrderModel{
-  double amount;
-  String currency;
+class OrderModel {
+  double? amount;
+  String? currency;
 
-  OrderModel(this.amount, this.currency);
+  OrderModel({this.amount, this.currency});
 
   Map<String, dynamic> toJson() => {
-    'amount': amount,
-    'currency': currency,
-  };
-
+        'amount': amount,
+        'currency': currency,
+      };
 }

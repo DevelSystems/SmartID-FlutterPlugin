@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:smartid_flutter/models/account_model.dart';
-import 'package:smartid_flutter/models/account_to_model.dart';
-import 'package:smartid_flutter/models/credit_card_model.dart';
 import 'package:smartid_flutter/models/credit_to_model.dart';
 import 'package:smartid_flutter/models/debit_from_model.dart';
-import 'package:smartid_flutter/models/device_model.dart';
 import 'package:smartid_flutter/models/operation_model.dart';
 import 'package:smartid_flutter/models/order_model.dart';
 import 'package:smartid_flutter/models/transaction_model.dart';
@@ -26,16 +20,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController userNameController = TextEditingController(text: 'test');
-  TextEditingController licenseController = TextEditingController(text: 'HZYYaGB2Z3uubOfrwf8wMYBUi0MAneecMf8G0OB6O7F3');
+  TextEditingController userNameController =
+      TextEditingController(text: 'test');
+  TextEditingController licenseController = TextEditingController(
+      text: 'AHvO67N79kYfp3Tsq09Wq4mOrhNCLCdhHjT5xWxA4crZ');
   TextEditingController channelController = TextEditingController(text: '1');
-  final SmartIdFlutter _smartIdFlutter = SmartIdFlutter();
 
   @override
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -48,113 +42,81 @@ class _MyAppState extends State<MyApp> {
           child: Form(
             key: _formKey,
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   TextFormField(
                     controller: userNameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Username',
                     ),
                   ),
                   TextFormField(
                     controller: licenseController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'License',
                     ),
                   ),
                   TextFormField(
                     controller: channelController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Channel',
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch, // Stretch the buttons to match the column width
+                      crossAxisAlignment: CrossAxisAlignment
+                          .stretch, // Stretch the buttons to match the column width
                       children: [
                         ElevatedButton(
                           onPressed: () {
-                            SmartIdFlutter.initNativeInstance(licenseController.text, userNameController.text, false);
+                            SmartIdFlutter.initNativeInstance(
+                                licenseController.text,
+                                userNameController.text,
+                                false);
                           },
-                          child: Text('Init Instance'),
+                          child: const Text('Init Instance'),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            SmartIdFlutter.linkNative(channelController.text, 'session');
+                            SmartIdFlutter.linkNative(
+                                channelController.text, 'session');
                           },
-                          child: Text('Link'),
+                          child: const Text('Link'),
                         ),
                         ElevatedButton(
                           onPressed: () {
-                            SmartIdFlutter.unlinkNative(channelController.text, 'session');
+                            SmartIdFlutter.unlinkNative(
+                                channelController.text, 'session');
                           },
-                          child: Text('Unlink'),
+                          child: const Text('Unlink'),
                         ),
                         ElevatedButton(
                           onPressed: () {
                             OperationModel operationModel = OperationModel(
-                                channelController.text,
-                                DeviceModel(
-                                    '',
-                                    ''
+                                channelId: channelController.text,
+                                transaction: TransactionModel(
+                                    category: 'transfer',
+                                    type: 'CC to CA',
+                                    description: 'prueba',
+                                    details: {}),
+                                account: AccountModel(
+                                    client: userNameController.text,
+                                    accountNumber: '123'),
+                                debitFrom: DebitFromModel(
+                                  account: '123123123',
                                 ),
-                                TransactionModel(
-                                    'transfer',
-                                    'CC to CA',
-                                    'prueba',
-                                    '',
-                                    '',
-                                    {}
-                                ),
-                                AccountModel(
-                                    userNameController.text,
-                                    0,
-                                    '',
-                                    '',
-                                    '',
-                                    '',
-                                    '123',
-                                    ''
-                                ),
-                                AccountToModel(
-                                    '',
-                                    0,
-                                    '',
-                                    '',
-                                    '',
-                                    '',
-                                    '',
-                                    ''
-                                ),
-                                DebitFromModel(
-                                    '123123123',
-                                    '',
-                                    ''
-                                ),
-                                CreditToModel(
-                                    '123123124',
-                                    '',
-                                    ''
-                                ),
-                                CreditCardModel(
-                                    '',
-                                    '',
-                                    '',
-                                    ''
-                                ),
-                                OrderModel(
-                                    10,
-                                    'USD'
-                                ),
-                                'timeStamp'
-                            );
+                                creditTo: CreditToModel(account: '123123124'),
+                                order:
+                                    OrderModel(amount: 10.0, currency: 'USD'),
+                                timeStamp: 'timeStamp');
 
-                            SmartIdFlutter.createOperationNative(licenseController.text, operationModel, true);
+                            SmartIdFlutter.createOperationNative(
+                                licenseController.text, operationModel, true);
                           },
-                          child: Text('Create Operation'),
+                          child: const Text('Create Operation'),
                         ),
                       ],
                     ),
